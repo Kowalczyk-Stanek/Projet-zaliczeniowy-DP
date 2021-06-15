@@ -1,0 +1,77 @@
+<div class="container">
+<div class="list row">
+    <div class="col-md-8">
+    </div>
+    <div class="col-md-6">
+      <h4>Lista autorów</h4>
+      <ul class="list-group">
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Imię autora</th>
+                <th scope="col">Naziwko autora</th>
+                <th scope="col">Edycja</th>
+                <th scope="col">Usuwanie</th>
+              </tr>
+            </thead>
+            <tbody>
+        <tr
+         
+          *ngFor="let author of authors; let i = index"
+
+        >
+        <th scope="row">{{i+1}}</th>
+        <td>{{ author.authorName }}</td>
+        <td>{{ author.authorSurname }}</td>
+        <td><button type="button" class="btn btn-dark" [disabled]="shouldDisable(author.authorId)" (click)="toggle(author.authorId)">Edytuj</button></td>
+        <td><button type="button" class="btn btn-danger" (click)="DeleteAuthor(author.authorId)"  data-bs-toggle="tooltip" data-bs-placement="right" title="Usunięcie autora oznacza również usunięcie jego książek">Usuń</button></td>
+          
+          
+            </tr>
+    </tbody>
+</table>
+
+       
+      </ul>
+
+    <button type="button" class="btn btn-dark" [routerLink]="['/addauthors']">Dodaj nowego autora</button>
+
+
+    </div>
+
+    </div>
+
+  <ng-container *ngIf="show">
+    <div class="submit-form" style="width: 500px;">
+      <div class="form-group">
+          <label for="authorname">Imię Autora</label>
+          <input
+              type = "text"
+              class = "form-control"
+              required
+              [(ngModel)]="author.authorName"
+              name="authorname"
+          />
+      </div>
+
+      <div class="form-group">
+          <label for="authorSurname">Nazwisko Autora</label>
+          <input
+              type = "text"
+              class = "form-control"
+              required
+              [(ngModel)]="author.authorSurname"
+              name="authorSurname"
+          />
+      </div>
+
+      <button (click)="EditAuthor()" [routerLink]="['/listauthor']" class="editbtn btn btn-success">Edytuj</button>
+</div>
+  </ng-container>
+
+  
+</div>
+
+
+
